@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // const {useState} = React;
+
+        // function Counter(){
+        //     const [state, setState] = React;
+
+        //     return (
+        //         <>
+        //             <h1> count : {state.value} </h1>
+        //             <button onClick={() => setState({value : state.value +1})}>+1</button>
+        //             <button onClick={() => setState({value : state.value -1})}>-1</button>
+        //         </>
+        //     );
+        // }
+
+        const {useReducer} = React;
+
+        // 일반 자바스크립트의 함수이다. 
+        function reducer(state, action){ // 자바스크립트 함수를 hooks로 사용한다. 소문자로 사용해야 함 reducer
+            console.log(state);
+            console.log(action);
+            switch(action.type){ // type에 값에 따라서 switch문으로 제어한다.                   
+                case 'DECREMENT' :
+                    console.log("-1")
+                    return {value : state.value -1};
+                case 'INCREMENT' :
+                    console.log("+1")
+                    return {value : state.value +1};
+                default : return state;
+            }
+        }
+
+        function Counter(){
+            // 초기값, 함수 = useReducer (함수 객체, 초기값);
+            const [state, dispatch] = useReducer(reducer, {value:1}); // 첫번째 인자를 넣음  reducer : component외부에 있디. 파일을 분리해서 사용할 것이다. 1: 함수 프로퍼티 , 2: value 값(초기값) 
+                // 함수가 dispatch로 전달됨 
+            return (
+                <>
+                    <h1> count : {state.value} </h1>
+                    <button onClick={() => dispatch({type : "INCREMENT"})}>+1</button> 
+                    <button onClick={() => dispatch({type : "DECREMENT"})}>-1</button>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<Counter/>);
+    </script>
+</body>
+</html>

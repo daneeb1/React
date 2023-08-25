@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const {useState, useMemo} = React;
+
+        const hardCalculator = num => {
+            console.log("어려운 계산");
+
+            for(let index = 0; index < 19999999; index++){ // 반복문을 처리 후 렌더링을 해준다. 메모라이즈 처리를 해둔다. 
+
+        }
+
+        return num + 100000000;
+        }   
+
+        const easyCalculator = num => {
+            console.log("쉬운 계산기");
+            return num + 1;
+        }
+
+        function App(){
+            const [hardNumber, setHardNumber] = useState(0);
+            const [easyNumber, setEasyNumber] = useState(0);
+            
+            // 최초 1회 실행시 동일하다. 
+            // 그 다음엔 하나씩 불러온다.  
+            const hardSum = useMemo(() => {
+                return hardCalculator(hardNumber);  
+            }, [hardNumber]);
+
+            const easySum = useMemo(() => {
+                return easyCalculator(easyNumber); 
+            }, [easyNumber]); // 대상이 변경되지 않으면 호출시키지 않는다. 렌더링할 때 변경되지 않으면 기존에 있던 값을 꺼내서 사용한다. 
+            // 성능 최적화를 위해서 사용한다. 
+
+            return(
+                <>
+                    <h3>어려운 계산</h3>
+                    <input
+                        type = "number"
+                        value = {hardNumber}
+                        onChange = {e => setHardNumber(parseInt(e.target.value))}
+                    />
+                    <span>+ 10000000 = {hardSum}</span>
+                    <br/>
+                    <h3>쉬운 계산</h3> 
+                    <input // 변수를 재 초기화  
+                        type = "number"
+                        value = {easyNumber}
+                        onChange = {e => setEasyNumber(parseInt(e.target.value))}
+                    />
+                    <span>+ 1 = {easySum}</span>
+                </>
+            );
+        }
+
+            ReactDOM.createRoot(document.getElementById("root")).render(<App/>);      
+            //지역 변수는 초기화 됨 , hook는 초기화되지 않는다. (state는 초기화가 되지 않는다.) -> hooks에 있는거 꺼내서 씀 
+            // cash영역에서 이것을 관리하고 있음(저장) . -> 리로딩이 될 때마다 꺼내서 준다. (원래 지역변수는 재할당이 되어야하지만 cash에 있는 것을 꺼내서 사용한다.)
+    </script>
+    
+</body>
+</html>
