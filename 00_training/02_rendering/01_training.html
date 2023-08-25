@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 콜라 자판기 사용자에게 입력을 받아 화면에 아래의 내용을 표시해주세요 (1. 콜라(1000원), 2. 펩시(800원)) 
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+
+        const answer = parseInt(prompt("자판기 번호를 입력하세요. \n 1. 코카콜라(1000원) \n 2. 펩시(800원)"));
+
+        const positiveElement = <h1>코카콜라를 선택하였습니다.</h1>
+        const negativeElement = <h1>펩시를 선택하였습니다.</h1>
+        root.render(
+            (answer === 1)? positiveElement:negativeElement
+        );
+
+    </script>
+</body>
+</html>
