@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        //todo list app을 만들어 주세요.
+        function List({list}){
+            const [isOn, setIsOn] = useState(false);
+            const style = {
+                fontSize : '20px',
+                textDecoration: isOn? "line-through" : "none"
+            }
+            return (
+                <>
+                    <input type="checkbox" onChange={()=>{setIsOn(!isOn)}}/>
+                    <span style = {style}>{list}</span>
+                </>
+            )
+        }
+
+        function Flan({work,remove}){
+
+            return(
+                <>
+                    {
+                        work.map(app => (
+                            <div>
+                                <List list={list}/>
+                                <button onClick={()=>{
+                                    remove(list)
+                                }}>삭제</button>
+                            </div>
+                        ))
+                    }
+                </>
+            );
+        }
+
+        function App(){
+            const [work, setWork] = useState([])
+
+            const style = {
+                width : '300px',
+                heigh : '400px',
+                backgroundColor : 'pink'
+            }
+
+            const app ={
+                heigh : '83%',
+                width : '100%'
+            }
+
+            const inputStyle = {
+                width : '70%'
+            }
+
+            const remove = list => {
+                setWork(work.filter(w => w !== list));
+                console.log(work);
+            }
+
+            return(
+                <div style = {style}>
+                    <h3 style = {{textAlign : "center"}}>To do List</h3>
+                    <div style = {board}>
+                        <Flan work = {work} remove = {remove}/>
+                    </div>
+                    <input id= "work" type="text" style={inputStyle}/>
+
+                    <button onClick={() => {
+                        let list = document.getElementById('work');
+                        setWork([...work, list.value]);
+                        list.value = '';
+                    }}>입력</button>
+                </div>
+            );
+        
+        // ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+        }
+    </script>
+</body>
+</html>
