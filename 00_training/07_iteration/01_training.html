@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // [{key : 1, name:김형통}, {key : 2, name:고호빵}, {key : 3, name:전지환}, {key : 4, name:강소임}, {key : 5, name:이단백질}]을 state에 저장하고 화면에 각 요소를 보여주세요.
+        const {useState} = React;
+        
+        function Sangwoo(){  
+
+            const [names, setNames] = useState([
+                {id:1, name: '김형통'},
+                {id:2, name: '고호빵'},
+                {id:3, name: '전지한'},
+                {id:4, name: '강소임'},
+                {id:5, name: '이단백질'}
+            ]);
+            
+        return (
+            <>
+                <ul>
+                    {names.map(item => (
+                            <li key={item.id}>{item.name}</li>
+                        ))}
+                </ul>
+            </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<Sangwoo />);
+    </script>
+</body>
+</html>
