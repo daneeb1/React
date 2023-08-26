@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        //클래스형 컴포넌트를 이용하여 text라는 state를 만들어주세요. input창의 내용이 입력됨에 따라 내부의 값이 변경되도록 해주세요.
+        class Title extends React.Component{
+
+            constructor(props){
+                super(props);
+
+                this.state = {
+                    text : '나도 집가고 싶다'
+                };
+            }
+
+            onChange = e => {
+                this.setState({text : e.target.value});
+            }
+
+
+            render(){
+
+                return(
+                    <>
+                        <input 
+                            type = "text"
+                            onChange = {this.onChange}
+                        />
+                        <p> {this.state.text} </p>
+                    </>
+                );
+            }
+
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<Title/>);
+    </script>
+    
+</body>
+</html>
