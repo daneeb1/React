@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 클래스형 컴포넌트로 Title, content, footer를 생성하고 (내용은 자유롭게 채워주세요).
+        // 3개의 컴포넌트를 담는 App 컴포넌트를 생성하여 사용자의 화면에 표시해주세요.
+        class Title extends React.Component{
+            render(){
+                return(
+                    <h1>
+                        김서영
+                    </h1>
+                )
+            };
+        }
+
+        class Content extends React.Component{
+            render(){
+                return(
+                    <p>
+                        키 : 2m, 발 : 290mm
+                    </p>  
+                )      
+            };
+        }
+
+        class Footer extends React.Component{
+            render(){
+                return(
+                    <footer>
+                        김서영 바보 놈 !!!!!
+                    </footer>
+                )
+            };
+        }
+
+        class App extends React.Component{
+            render(){
+                return(
+                <div>
+                    <Title/>
+                    <Content/>
+                    <Footer/>
+                </div>
+                )
+            };
+
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+    </script>
+</body>
+</html>
