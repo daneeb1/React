@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        async function callApi(){
+            const promise = fetch('https://jsonplaceholder.typicode.com/users');
+            // console.log(promise['[[PromiseResult]]']); // 직접적으로 접근하는게 불가능하다. , 이렇게 사용불가 
+
+            const response = await promise; // promise가 끝날때까지 대기한다. 
+            // console.log(response.status); // 응답코드(200 : 성공)
+
+            console.log(response.headers); // 하나씩 접근해서 꺼내올 수 있다. 
+            for(let [key, value] of response.headers){
+                console.log(`${key} : ${value}`); // 일일히 요청하면 불편하다. 
+            }
+
+            console.log(`본문 내용 사용 여부 : ${response.bodyUsed}`);
+
+            const json = await response.json(); // json은 형식으로 받아서 저장해서 보여준다. java에서도 json형식을 많이 취급한다. 
+            console.log(json);
+
+            console.log('end');
+        }
+
+        function App(){
+            const onClickHandler = () => {
+                callApi();
+            }
+
+            return <button onClick = {onClickHandler}> Api 요청</button>
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+        callApi();
+    </script>
+</body>
+</html>
